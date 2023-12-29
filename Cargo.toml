@@ -3,6 +3,10 @@ name = "rbgn"
 version = "0.1.0"
 edition = "2021"
 authors = ["romw314"]
+description = "A modern, cross-platform alternative to Bashgenn."
+repository = "https://github.com/romw314/rust-bashgenn/"
+rust-version = 1.75
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
