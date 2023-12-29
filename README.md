@@ -9,7 +9,7 @@ First you need to [install Rust](https://rustup.rs/), if you don't already.
 Then use this command to install RBGN:
 
 ```sh
-cargo install --git https://github.com/romw314/rust-bashgenn.git
+cargo install rbgn
 ```
 
 ## CLI Usage
