@@ -1,6 +1,6 @@
 # RBGN
 
-RBGN - A complete rewrite of [Bashgenn](https://github.com/romw314/bashgenn) with the support for interpreting. Written in Rust.
+RBGN - A complete rewrite of [Bashgenn](https://github.com/romw314/bashgenn) with the support for interpreting, written in Rust.
 
 [![Crates.io Version](https://img.shields.io/crates/v/rbgn)](https://crates.io/crates/rbgn)
 [![Crates.io Total Downloads](https://img.shields.io/crates/d/rbgn)](https://crates.io/crates/rbgn)
