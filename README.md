@@ -23,6 +23,8 @@ Then use this command to install RBGN:
 cargo install rbgn
 ```
 
+See [the wiki](https://github.com/romw314/rust-bashgenn/wiki/Installation) for more installation options.
+
 ## CLI Usage
 
 ```
