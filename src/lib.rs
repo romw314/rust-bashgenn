@@ -3,9 +3,10 @@
 //! Here is an example of running one command:
 //!
 //! ```
+//! # extern crate anyhow;
 //! use linereader::LineReader;
-//! use std::io;
-//! use rbgn::{LineReaderWrapper, Command, run_command};
+//! use std::{io, collections::HashMap};
+//! use rbgn::{LineReaderWrapper, Command, Runtime, run_command};
 //! # fn main() -> anyhow::Result<()> {
 //! let mut reader = LineReaderWrapper::new("STATIC_STR_VAR my_var my_value".as_bytes());
 //! let mut stdin = LineReader::new(io::stdin());
@@ -23,8 +24,8 @@
 //!
 //! ```no_run
 //! use linereader::LineReader;
-//! use std::{io, fs::File};
-//! use rbgn::{LineReaderWrapper, Command, run_command};
+//! use std::{io, fs::File, collections::HashMap};
+//! use rbgn::{LineReaderWrapper, Command, Runtime, run_command};
 //! # fn main() -> anyhow::Result<()> {
 //! let file = File::open("script.bgn")?;
 //! let mut reader = LineReaderWrapper::new(line);
