@@ -1,3 +1,45 @@
+//! To run a script, you can use [linereader](https://docs.rs/linereader).
+//!
+//! Here is an example of running one command:
+//!
+//! ```
+//! use linereader::LineReader;
+//! use std::io;
+//! use rbgn::{LineReaderWrapper, Command, run_command};
+//! # fn main() -> anyhow::Result<()> {
+//! let mut reader = LineReaderWrapper::new("STATIC_STR_VAR my_var my_value".as_bytes());
+//! let mut stdin = LineReader::new(io::stdin());
+//! let mut vars: HashMap<String, String> = HashMap::new();
+//! let mut runtime = Runtime { vars: &mut vars, stdin: &mut stdin };
+//! let line = &String::from(std::str::from_utf8(reader.next_line().unwrap()?).unwrap());
+//! let cmd = Command::new(line);
+//! run_command(cmd, &mut runtime, &mut reader);
+//! assert_eq!(vars.get(&String::from("my_var")).unwrap(), "my_value");
+//! # Ok(())
+//! # }
+//! ```
+//!
+//! Here is a more complex example:
+//!
+//! ```no_run
+//! use linereader::LineReader;
+//! use std::{io, fs::File};
+//! use rbgn::{LineReaderWrapper, Command, run_command};
+//! # fn main() -> anyhow::Result<()> {
+//! let file = File::open("script.bgn")?;
+//! let mut reader = LineReaderWrapper::new(line);
+//! let mut stdin = LineReader::new(io::stdin());
+//! let mut vars: HashMap<String, String> = HashMap::new();
+//! let mut runtime = Runtime { vars: &mut vars, stdin: &mut stdin };
+//! while let Some(line) = reader.next_line() {
+//!     let line = &String::from(std::str::from_utf8(line?).unwrap());
+//!     let cmd = Command::new(line);
+//!     run_command(cmd, &mut runtime, &mut reader);
+//! }
+//! # Ok(())
+//! # }
+//! ```
+
 use std::time::Duration;
 use std::io::Write;
 use std::collections::HashMap;
