@@ -22,7 +22,7 @@ jobs:
       with:
         rust-version: 1.75
     - name: Build
-      run: cargo build --verbose
+      run: cargo build
   test:
     strategy:
       matrix:
@@ -35,4 +35,4 @@ jobs:
       with:
         rust-version: 1.75
     - name: Run tests
-      run: cargo test --verbose
+      run: cargo test
