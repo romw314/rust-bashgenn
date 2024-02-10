@@ -23,9 +23,10 @@
 //! Here is a more complex example:
 //!
 //! ```no_run
+//! # extern crate anyhow;
 //! use linereader::LineReader;
 //! use std::{io, fs::File, collections::HashMap};
-//! use rbgn::{LineReaderWrapper, Command, Runtime, run_command};
+//! use rbgn::{LineReaderWrapper, Command, Runtime, InputReader, run_command};
 //! # fn main() -> anyhow::Result<()> {
 //! let file = File::open("script.bgn")?;
 //! let mut reader = LineReaderWrapper::new(line);
