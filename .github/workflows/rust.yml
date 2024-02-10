@@ -11,9 +11,10 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        os: [ubuntu, windows, macos]
+    runs-on: ${{ matrix.os }}-latest
     steps:
     - uses: actions/checkout@v3
     - name: Setup Rust
@@ -22,5 +23,16 @@ jobs:
         rust-version: 1.75
     - name: Build
       run: cargo build --verbose
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu, windows, macos]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Rust
+      uses: ningenMe/setup-rustup@v1.1.0
+      with:
+        rust-version: 1.75
     - name: Run tests
       run: cargo test --verbose
