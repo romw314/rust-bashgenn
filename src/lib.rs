@@ -29,7 +29,7 @@
 //! use rbgn::{LineReaderWrapper, Command, Runtime, InputReader, run_command};
 //! # fn main() -> anyhow::Result<()> {
 //! let file = File::open("script.bgn")?;
-//! let mut reader = LineReaderWrapper::new(line);
+//! let mut reader = LineReaderWrapper::new(file);
 //! let mut stdin = LineReader::new(io::stdin());
 //! let mut vars: HashMap<String, String> = HashMap::new();
 //! let mut runtime = Runtime { vars: &mut vars, stdin: &mut stdin };
