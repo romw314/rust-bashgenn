@@ -6,7 +6,7 @@
 //! # extern crate anyhow;
 //! use linereader::LineReader;
 //! use std::{io, collections::HashMap};
-//! use rbgn::{LineReaderWrapper, Command, Runtime, run_command};
+//! use rbgn::{LineReaderWrapper, Command, Runtime, InputReader, run_command};
 //! # fn main() -> anyhow::Result<()> {
 //! let mut reader = LineReaderWrapper::new("STATIC_STR_VAR my_var my_value".as_bytes());
 //! let mut stdin = LineReader::new(io::stdin());
