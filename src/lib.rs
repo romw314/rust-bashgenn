@@ -115,9 +115,15 @@ macro_rules! wc_while {
 					vec.push(line_str);
 				}
 			}
+			let joined = vec.join("\n");
+			let bytes = joined.as_bytes();
 			#[allow(while_true)]
 			while $condition {
-				vec.iter().for_each(|line| run_command(Command::new(line), $runtime, $reader));
+				let mut reader = LineReaderWrapper::new(bytes);
+				while let Some(line) = reader.next_line() {
+					let line_str = String::from(std::str::from_utf8(line.unwrap()).unwrap().trim());
+					run_command(Command::new(&line_str), $runtime, &mut reader);
+				}
 			}
 		}
 	}
@@ -138,6 +144,9 @@ pub fn run_command<'a, TInput: std::io::Read>(cmd: Command, runtime: &mut Runtim
 		}
 		"ECHO" => {
 			println!("{}", getvar(runtime.vars, cmd.arg1));
+		}
+		"ECHONL" => {
+			println!();
 		}
 		"__RBGN_NONL" => {
 			print!("{}", getvar(runtime.vars, cmd.arg1));
@@ -222,5 +231,27 @@ mod tests {
 		let cmd = Command::new(line);
 		run_command(cmd, &mut runtime, &mut reader);
 		assert_eq!(vars.get(&String::from("our_variable")).unwrap(), "our_content");
+	}
+
+	#[test]
+	fn test_nested_loops() {
+		let script = r#"
+			STATIC_STR_VAR initial abcdef
+			STATIC_STR_VAR result
+			REPEAT 3
+				REPEAT 2
+					STOREFIRST initial result
+				DONE
+			DONE"#;
+		let mut reader = LineReaderWrapper::new(script.as_bytes());
+		let mut stdin = LineReader::new("".as_bytes());
+		let mut vars: HashMap<String, String> = HashMap::new();
+		let mut runtime = Runtime { vars: &mut vars, stdin: &mut stdin };
+		while let Some(line) = reader.next_line() {
+			let line = &String::from(std::str::from_utf8(line.unwrap()).unwrap());
+			let cmd = Command::new(line);
+			run_command(cmd, &mut runtime, &mut reader);
+		}
+		assert_eq!(vars.get(&String::from("result")).unwrap(), "a");
 	}
 }
